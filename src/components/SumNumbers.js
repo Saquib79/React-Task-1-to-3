@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 
 function SumNumbers() {
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
+  const [num1, setNum1] = useState('');
+  const [num2, setNum2] = useState('');
+
+  const handleNum1Change = (e) => {
+    const value = e.target.value;
+    setNum1(value); // Keep as string to allow typing negative numbers
+  };
+
+  const handleNum2Change = (e) => {
+    const value = e.target.value;
+    setNum2(value); // Keep as string to allow typing negative numbers
+  };
+
+  // Calculate the sum, converting to numbers
+  const sum = Number(num1) + Number(num2);
 
   return (
     <div className="sum-numbers">
+      <h2>Sum Calculator</h2>
+      <p>Enter two numbers (negative values are allowed):</p>
       <input
-        type="number"
+        type="text" // Change type to text for manual entry
         value={num1}
-        onChange={(e) => setNum1(Number(e.target.value))}
+        onChange={handleNum1Change}
+        placeholder="First number"
       />
       <input
-        type="number"
+        type="text" // Change type to text for manual entry
         value={num2}
-        onChange={(e) => setNum2(Number(e.target.value))}
+        onChange={handleNum2Change}
+        placeholder="Second number"
       />
-      <p>Sum: {num1 + num2}</p>
+      <p>Sum: {sum}</p>
     </div>
   );
 }
